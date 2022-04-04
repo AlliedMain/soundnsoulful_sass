@@ -75,3 +75,15 @@ class Song(models.Model):
         p = math.pow(1024, i)
         s = round(self.size / p, 2)
         return "%s %s" % (s, size_name[i])
+
+
+class Testimonials(models.Model):
+    STATUS = ((0,"Draft"),(1,"Publish"))
+    title = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True)
+    updated_on = models.DateTimeField(auto_now= True)
+
+
+
+    def __str__(self):
+        return self.title

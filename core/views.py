@@ -115,6 +115,16 @@ class ArtistDetailView(DetailView):
         context['songs'] = self.get_object().songs.all()
         return context
 
+class TestimonialsDetailView(DetailView):
+    model = Testimonials
+    template_name = 'testimonials/show.html'
+    context_object_name = 'testimonials'
+
+    def get_context_data(self, **kwargs):
+        context = super(TestimonialsDetailView, self).get_context_data(**kwargs)
+        context['testimonials'] = self.get_object().testimonials.all()
+        return context
+
 
 class FavoriteCreateView(CreateView):
     form_class = FavoriteForm
