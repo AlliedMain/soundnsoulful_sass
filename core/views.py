@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, DeleteView, ListView
+from django.http  import HttpResponse
 
 from utils.song_utils import generate_key
 from .forms import *
@@ -80,10 +81,22 @@ class SongDetailsView(DetailView):
     slug_url_kwarg = 'audio_id'
 
 
+
+def affirmations(request, song_id):
+    aff = Song.objects.get(audio_id=song_id).affirmations
+    return HttpResponse(aff)
+
+
+
 class GenreListView(ListView):
     model = Genre
     template_name = 'genres/index.html'
     context_object_name = 'genres'
+
+# class AffirmationsListView(ListView):
+#     model = Song
+#     template_name = 'genres/index.html'
+#     context_object_name = 'genres'
 
 
 class SongsByGenreListView(DetailView):

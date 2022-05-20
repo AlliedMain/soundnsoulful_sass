@@ -58,12 +58,12 @@
     {% include 'includes/nav.html' %}
     {% block content %}{% endblock %}
 </div>
-<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header border-bottom-0 pb-0">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
+  <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header border-bottom-0 pb-0">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                  </button>
             </div>
             <h6 class="modal-title text-center mb-3" id="loginTitle">Login For Soulful Listening Experience</h6>
             <div class="modal-body">
@@ -122,6 +122,10 @@
                     </div>
                     <p id="register-error"></p>
                     <button type="submit" class="btn btn-block btn-bold btn-air btn-info">Register</button>
+                    <br></br>
+                    <h5> Start Free trail at zero cost</h5>
+                    <input type="radio" id="html" name="fav_language" value="Pay Now ">
+                    <label for="html">Pay Now</label><br>
                 </form>
             </div>
         </div>

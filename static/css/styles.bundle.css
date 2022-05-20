@@ -2227,7 +2227,6 @@ body.theme-dark #footer:after {
     display: table-cell;
     vertical-align: middle
 }
-
 .custom-card--inline {
     display: -webkit-box;
     display: -ms-flexbox;

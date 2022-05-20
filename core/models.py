@@ -58,6 +58,8 @@ class Song(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
     featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(verbose_name='Created At', default=timezone.now)
+    #affirmations = models.CharField(max_length=1250, verbose_name="Affirmations")
+    affrimations_song= models.TextField()
 
     def __str__(self):
         return self.title
