@@ -1,11 +1,11 @@
 from rest_framework import serializers
 
-from core.models import Song, Artist, Genre
+from core.models import Song, Album, Genre
 
 
-class ArtistSerializer(serializers.ModelSerializer):
+class AlbumSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Artist
+        model = Album
         fields = "__all__"
 
 
@@ -16,10 +16,10 @@ class GenreSerializer(serializers.ModelSerializer):
 
 
 class SongSerializer(serializers.ModelSerializer):
-    artists = ArtistSerializer(many=True)
+    album = AlbumSerializer(many=True)
     genre = GenreSerializer()
     url = serializers.SerializerMethodField('get_url')
-    artist = serializers.SerializerMethodField('get_joined_artist')
+    album = serializers.SerializerMethodField('get_joined_album')
 
     class Meta:
         model = Song
@@ -29,12 +29,12 @@ class SongSerializer(serializers.ModelSerializer):
         return self.context['request'].build_absolute_uri(obj.song.url)
 
     def get_joined_artist(self, obj):
-        return ", ".join([a.name for a in obj.artists.all()])
+        return ", ".join([a.name for a in obj.album.all()])
 
 
-class ArtistSongsSerializer(serializers.ModelSerializer):
+class AlbumSongsSerializer(serializers.ModelSerializer):
     songs = SongSerializer(many=True, read_only=True)
 
     class Meta:
-        model = Artist
+        model = Album
         fields = "__all__"

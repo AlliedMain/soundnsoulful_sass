@@ -13,7 +13,7 @@ from tinytag import TinyTag
 
 def home(request):
     context = {
-        'artists': Artist.objects.all(),
+        'album': Album.objects.all(),
         'genres': Genre.objects.all()[:6],
         'latest_songs': Song.objects.all()[:6]
     }
@@ -30,7 +30,7 @@ class SongUploadView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(SongUploadView, self).get_context_data(**kwargs)
-        context['artists'] = Artist.objects.all()
+        context['album'] = Album.objects.all()
         context['genres'] = Genre.objects.all()
         return context
 
@@ -55,12 +55,12 @@ class SongUploadView(CreateView):
         form.instance.user = self.request.user
         form.instance.playtime = song.duration
         form.instance.size = song.filesize
-        artists = []
-        for a in self.request.POST.getlist('artists[]'):
+        album = []
+        for a in self.request.POST.getlist('album[]'):
             try:
-                artists.append(int(a))
+                album.append(int(a))
             except:
-                artist = Artist.objects.create(name=a)
+                artist = Album.objects.create(name=a)
                 artists.append(artist)
         form.save()
         form.instance.artists.set(artists)
@@ -110,21 +110,21 @@ class SongsByGenreListView(DetailView):
         return context
 
 
-class ArtistListView(ListView):
-    model = Artist
-    template_name = 'artists/index.html'
-    context_object_name = 'artists'
+class AlbumListView(ListView):
+     model = Album
+     template_name = 'album/index.html'
+     context_object_name = 'album'
 
 
-class ArtistDetailView(DetailView):
-    model = Artist
-    template_name = 'artists/show.html'
-    context_object_name = 'artist'
+class AlbumDetailView(DetailView):
+    model = Album
+    template_name = 'album/show.html'
+    context_object_name = 'album'
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
 
     def get_context_data(self, **kwargs):
-        context = super(ArtistDetailView, self).get_context_data(**kwargs)
+        context = super(AlbumDetailView, self).get_context_data(**kwargs)
         context['songs'] = self.get_object().songs.all()
         return context
 

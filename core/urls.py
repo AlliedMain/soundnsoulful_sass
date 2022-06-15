@@ -7,8 +7,8 @@ app_name = "core"
 
 urlpatterns = [
     path('', home, name='home'),
-    path('artists', ArtistListView.as_view(), name='artists'),
-    path('artists/<slug:slug>', ArtistDetailView.as_view(), name='artist-details'),
+    path('artists', AlbumListView.as_view(), name='artists'),
+    path('artists/<slug:slug>', AlbumDetailView.as_view(), name='artist-details'),
     path('genres', GenreListView.as_view(), name='genres'),
     path('affirmations/<song_id>', affirmations, name='affirmations'),
     path('genres/<int:pk>', SongsByGenreListView.as_view(), name='songs-by-genre'),

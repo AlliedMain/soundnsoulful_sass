@@ -10,18 +10,26 @@ from accounts.models import User
 from utils.song_utils import generate_file_name
 
 
-class Artist(models.Model):
-    name = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True)
-    thumbnail = models.ImageField(upload_to="artists", default="artists/default.png")
-    bio = models.TextField(verbose_name='Artist Bio', null=True, blank=False)
+# class Artist(models.Model):
+#     name = models.CharField(max_length=255)
+#     slug = models.SlugField(unique=True)
+#     thumbnail = models.ImageField(upload_to="artists", default="artists/default.png")
+#     bio = models.TextField(verbose_name='Artist Bio', null=True, blank=False)
+
+#     def __str__(self):
+#         return self.name
+
+#     def save(self, *args, **kwargs):
+#         self.slug = slugify(self.name)
+#         super(Artist, self).save(*args, **kwargs)
+
+
+class Album(models.Model):
+    name = models.CharField(max_length=20, null=True)
+    thumbnail = models.ImageField(upload_to="album", default="album/album1.png")
 
     def __str__(self):
         return self.name
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super(Artist, self).save(*args, **kwargs)
 
 
 class Genre(models.Model):
@@ -51,7 +59,8 @@ class Song(models.Model):
     song = models.FileField(upload_to=song_directory_path, max_length=500)
     # audio_location = models.CharField(max_length=255)
     genre = models.ForeignKey(Genre, on_delete=models.DO_NOTHING)
-    artists = models.ManyToManyField(Artist, related_name='songs')
+    # artists = models.ManyToManyField(Artist, related_name='songs')
+    album = models.ManyToManyField(Album, related_name='album' )
     size = models.IntegerField(default=0)
     playtime = models.CharField(max_length=10, default="0.00")
     type = models.CharField(max_length=10)

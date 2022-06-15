@@ -4,7 +4,7 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from core.models import Song
-from .serializers import SongSerializer, ArtistSerializer, GenreSerializer, ArtistSongsSerializer
+from .serializers import SongSerializer, AlbumSerializer, GenreSerializer, AlbumSongsSerializer
 
 
 @api_view(['GET'])
@@ -48,20 +48,20 @@ class SongsByGenreListAPIView(ListAPIView):
             return self.model.objects.all().order_by('-created_at')
 
 
-class ArtistListAPIView(ListAPIView):
+class AlbumListAPIView(ListAPIView):
     """
-        List of artists
+        List of albums
     """
-    serializer_class = ArtistSerializer
+    serializer_class = AlbumSerializer
     model = serializer_class.Meta.model
     queryset = model.objects.all()
 
 
-class ArtistRetrieveAPIView(RetrieveAPIView):
+class AlbumRetrieveAPIView(RetrieveAPIView):
     """
-        Artist details view with songs
+        Albums details view with songs
     """
-    serializer_class = ArtistSongsSerializer
+    serializer_class = AlbumSongsSerializer
     model = serializer_class.Meta.model
     queryset = model.objects.all()
     lookup_field = 'slug'

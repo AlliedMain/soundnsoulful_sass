@@ -6,7 +6,7 @@ from .models import *
 class SongUploadForm(forms.ModelForm):
     class Meta:
         model = Song
-        fields = ("title", "description", "type", "genre", "thumbnail", "song")
+        fields = ("title", "description", "type", "genre", "thumbnail", "song", "album")
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)

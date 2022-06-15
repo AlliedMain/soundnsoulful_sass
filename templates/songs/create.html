@@ -157,12 +157,12 @@
                                             </div>
                                         </div>
                                         <div class="form-row form-group">
-                                            <label for="artistName" class="col-md-4 text-md-right col-form-label">Artist Name</label>
+                                            <label for="artistName" class="col-md-4 text-md-right col-form-label">Album Name</label>
                                             <div class="col-md-7">
                                                 <select name="artists[]" class="select2 form-control" multiple="multiple" id="artistName">
                                                     <option></option>
-                                                    {% for artist in artists %}
-                                                        <option value="{{ artist.id }}">{{ artist.name }}</option>
+                                                    {% for album in album %}
+                                                        <option value="{{ album.id }}">{{ album.name }}</option>
                                                     {% endfor %}
                                                 </select>
                                             </div>

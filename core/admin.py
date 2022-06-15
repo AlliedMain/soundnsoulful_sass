@@ -14,8 +14,16 @@ class SongModelAdmin(admin.ModelAdmin):
         return form
 
 
-@admin.register(Artist)
-class ArtistModelAdmin(admin.ModelAdmin):
-    prepopulated_fields = {
-        "slug": ("name",)
-    }
+# @admin.register(Artist)
+# class ArtistModelAdmin(admin.ModelAdmin):
+#     prepopulated_fields = {
+#         "slug": ("name",)
+#     }
+
+
+@admin.register(Album)
+class SongModelAdmin(admin.ModelAdmin):
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(SongModelAdmin, self).get_form(request, obj, **kwargs)
+        form.base_fields['audio_id'].initial = generate_key(15, 20)
+        return form
