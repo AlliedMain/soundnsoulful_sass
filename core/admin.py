@@ -4,6 +4,7 @@ from utils.song_utils import generate_key
 from .models import *
 
 admin.site.register(Genre)
+@admin.site.register(Album)
 
 
 @admin.register(Song)
@@ -20,10 +21,3 @@ class SongModelAdmin(admin.ModelAdmin):
 #         "slug": ("name",)
 #     }
 
-
-@admin.register(Album)
-class SongModelAdmin(admin.ModelAdmin):
-    def get_form(self, request, obj=None, **kwargs):
-        form = super(SongModelAdmin, self).get_form(request, obj, **kwargs)
-        form.base_fields['audio_id'].initial = generate_key(15, 20)
-        return form

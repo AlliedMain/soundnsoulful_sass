@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import permissions, status
 from rest_framework import response, decorators
+from django.views.decorators.csrf import csrf_exempt
 
 from .serializers import UserCreateSerializer
 
@@ -9,6 +10,7 @@ User = get_user_model()
 
 @decorators.api_view(["POST"])
 @decorators.permission_classes([permissions.AllowAny])
+@csrf_exempt
 def registration(request):
     serializer = UserCreateSerializer(data=request.data)
     if not serializer.is_valid(raise_exception=True):

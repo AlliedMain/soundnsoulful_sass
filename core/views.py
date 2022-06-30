@@ -60,10 +60,10 @@ class SongUploadView(CreateView):
             try:
                 album.append(int(a))
             except:
-                artist = Album.objects.create(name=a)
-                artists.append(artist)
+                album = Album.objects.create(name=a)
+                album.append(album)
         form.save()
-        form.instance.artists.set(artists)
+        form.instance.artists.set(album)
         form.save()
         data = {
             'status': True,
