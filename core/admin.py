@@ -4,7 +4,7 @@ from utils.song_utils import generate_key
 from .models import *
 
 admin.site.register(Genre)
-@admin.site.register(Album)
+admin.site.register(Album)
 
 
 @admin.register(Song)
