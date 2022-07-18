@@ -125,7 +125,7 @@ class AlbumDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(AlbumDetailView, self).get_context_data(**kwargs)
-        context['songs'] = self.get_object().songs.all()
+        context['album'] = self.get_object().songs.all()
         return context
 
 class TestimonialsDetailView(DetailView):
