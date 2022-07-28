@@ -1,0 +1,173 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load is_favorited %}
+
+
+{% block stylesheets %}
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+    <link href="{% static 'css/select2-bootstrap4.min.css' %}" rel="stylesheet"/>
+
+    <style>
+        .lds-ellipsis {
+            display: inline-block;
+            position: relative;
+            width: 64px;
+            height: 64px;
+        }
+
+        .lds-ellipsis div {
+            position: absolute;
+            top: 27px;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: #921bb3;
+            animation-timing-function: cubic-bezier(0, 1, 1, 0);
+        }
+
+        .lds-ellipsis div:nth-child(1) {
+            left: 6px;
+            animation: lds-ellipsis1 0.6s infinite;
+        }
+
+        .lds-ellipsis div:nth-child(2) {
+            left: 6px;
+            animation: lds-ellipsis2 0.6s infinite;
+        }
+
+        .lds-ellipsis div:nth-child(3) {
+            left: 26px;
+            animation: lds-ellipsis2 0.6s infinite;
+        }
+
+        .lds-ellipsis div:nth-child(4) {
+            left: 45px;
+            animation: lds-ellipsis3 0.6s infinite;
+        }
+
+        @keyframes lds-ellipsis1 {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes lds-ellipsis3 {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(0);
+            }
+        }
+
+        @keyframes lds-ellipsis2 {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(19px, 0);
+            }
+        }
+
+        .upload-image svg {
+            width: 55px;
+            height: 55px;
+        }
+
+        .upload-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 260px;
+            height: 260px;
+            background-color: rgba(0, 0, 0, 0.06);
+            color: #4b4b4b;
+            border-radius: 5px;
+            overflow: hidden;
+            border: 2px dashed #cdcdcd;
+        }
+        .page-width {
+            padding-left: 55px;
+            padding-right: 55px;
+        }
+        .grid {
+            *zoom: 1;
+            list-style: none;
+            padding: 0;
+
+        }
+</style>
+
+
+{% endblock %}
+
+
+
+{% block content %}
+      <main id="pageWrapper">
+          <div class="banner bg-song"></div>
+          <div class="main-container">
+              <div class="row section text-center text-md-left">
+                  <div class="col-xl-3 col-lg-4 col-sm-5">
+                      <img src="{{ song.thumbnail.url }}" alt="" class="card-img--radius-lg">
+                  </div>
+                  <div class="col-xl-9 col-lg-8 col-sm-7">
+                      <div class="row pt-4">
+                          <div class="col-xl-8 col-lg-6">
+
+
+                            <h1>Instructions <h1>
+
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="main-container">
+                            <div class="row section">
+                                <div class="col-xl-10 col-md-12 mx-auto">
+                                <div class="card">
+                                  <div class="page-width">
+  <div class="grid">
+    <div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
+      <div class="section-header text-center">
+        <h1>Instructions</h1>
+      </div>
+
+      <div class="rte">
+        <meta charset="utf-8">
+<p style="text-align: left;"><strong>STEP #1:</strong> Review our<span> </span><a href="https://soundandsoulful.com/pages/listening-tips" title="Listening Tips">Listening Tips</a><span> </span>page to get started.</p>
+<p style="text-align: left;"><strong>STEP #2:</strong> Log into your account and click the "Listen Now" button on the bottom of the page of the subliminal you want to listen to [pictured below]. This will take you to the affirmations + audio player page.</p>
+<p style="text-align: left;"><img src="https://cdn.shopify.com/s/files/1/0411/3815/9784/files/Untitled_design_16_f11b11e8-7bc4-4e6c-b2e5-160648e9c7c7_480x480.jpg?v=1632248231" alt="design" width="153" height="276" style="display: block; margin-left: auto; margin-right: auto;"></p>
+<p><strong>STEP #3:</strong><span> You will see the audio player pictured below at the bottom of the page. </span>Browse through the different background sounds available by using the skip buttons on the audio player, as pictured below. </p>
+<p><img src="https://cdn.shopify.com/s/files/1/0411/3815/9784/files/Untitled_design_8_155cd050-f9fc-43d9-89ac-ba15abc5ef7c_480x480.jpg?v=1614712468" alt="design" width="349" height="73" style="display: block; margin-left: auto; margin-right: auto;"></p>
+<p>Alternatively, you can see all available background sounds by tapping on the name of the subliminal here:</p>
+<p><img src="https://cdn.shopify.com/s/files/1/0411/3815/9784/files/Untitled_design_9_480x480.jpg?v=1614650378" alt="design" width="252" height="147" style="display: block; margin-left: auto; margin-right: auto;"></p>
+<p><strong>STEP #4:</strong><span> </span>Select the background sound you like best and start listening. Please note that the affirmations + binaural beat frequencies are identical regardless of which background track you choose.</p>
+<p><strong>STEP #5:</strong><span> </span>[Optional]: Save your favorite subliminals to a playlist by clicking the plus (+) icon on the audio player.</p>
+<p>When you save a subliminal to a playlist, it will queue up the next track automatically and play on an endless loop. </p>
+<p>To see all the playlists you've created, click the playlist icon pictured below.</p>
+<meta charset="utf-8">
+<p><img src="https://cdn.shopify.com/s/files/1/0411/3815/9784/files/Untitled_design_7_9cc815fc-26ab-4ee8-acd6-2c4816b2c24d_480x480.jpg?v=1614650126" alt="design" width="349" height="73" style="display: block; margin-left: auto; margin-right: auto;"></p>
+<p><em>** Please keep in mind that because of recent iPhone/Android updates, playlists on some devices may not loop while the phone screen is locked or a different page is open. </em></p>
+<p><em>On these devices, in order for playlists to loop the <strong>phone screen must be unlocked</strong> and the <strong>Sound &amp; Soulful playlists page must be open</strong> in order for looping to continue.</em></p>
+<p style="text-align: center;"><em><strong>If you still have questions, explore our "<a href="https://soundandsoulful.com/pages/faq">Frequently Asked Questions</a>" page for more information.</strong></em></p>
+      </div>
+    </div>
+  </div>
+</div>
+                                  </div>
+                                  </div>
+                                  </div>
+                                  </div>
+
+
+
+  {% endblock %}
+
+
+
+  {% include 'includes/footer.html' %}

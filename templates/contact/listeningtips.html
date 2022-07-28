@@ -1,0 +1,64 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+{% block stylesheet %}
+<style>
+    .page-width {
+            padding-left: 55px;
+            padding-right: 55px;
+        }
+        .grid {
+            *zoom: 1;
+            list-style: none;
+            padding: 0;
+
+        }
+</style>
+{% endblock %}
+
+    <main id="pageWrapper">
+        <div class="banner bg-song"></div>
+        <div class="main-container">
+            <div class="section row">
+                <div class="page-width">
+                    <div class="grid">
+                      <div class="page-width">
+                      <div class="grid">
+                        <div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
+                          <div class="section-header text-center">
+                            <h1>Listening Tips</h1>
+                          </div>
+                    
+                          <div class="rte">
+                            <p style="text-align: center;"><em>Here are some subliminals listening tips to help you get started:</em></p>
+                    <h3>1. Listen at a comfortably low volume.</h3>
+                    <p>The volume should be low enough that you can't hear the full affirmations embedded within the audio track.</p>
+                    <p>It's perfectly fine if you can hear a word or phrase here or there, but you should not consciously be able to understand the entire messages while listening.</p>
+                    <p>If you'd like to review the affirmations contained in the subliminal before listening or while you listen, they will be listed on the subliminal audio track page. </p>
+                    <h3>2. Do at least one "listening session" per day for 21 days.</h3>
+                    <p>As a general rule of thumb, we recommend listening consistently to a subliminal [ideally at least once per day] for 21 days.</p>
+                    <p>We define one "listening session" as simply listening to the subliminal audio track one time through [most of our subliminals are 10-20 minutes long].</p>
+                    <h3>3. Listen at ideal times for best results.</h3>
+                    <p>To get the best results, try listening during any of the following time frames:</p>
+                    <ul>
+                    <li>immediately after awakening in the morning</li>
+                    <li>right before falling asleep</li>
+                    <li>overnight, while sleeping</li>
+                    </ul>
+                    <p>It isn't necessary to listen at these times [in fact, some people listen throughout the day even while doing other tasks]. However, these are the ideal times to listen to subliminals because is believed that at these times the conscious mind is most dormant and therefore the subconscious mind is at its most open &amp; impressionable. </p>
+                    <h3>4. Consider using headphones. </h3>
+                    <p>While headphones aren't required, listening with headphones allows you to receive the full effect from the binaural beat frequencies contained within the track. </p>
+                    <h3>5. Meditate &amp; visualize when possible.</h3>
+                    <p>Although you don't need to meditate and visualize while listening to subliminals, we highly recommend setting aside 15-20 minutes a day for a visualization practice while listening to subliminals. </p>
+                    <p><em><strong>For any additional questions, explore our <a href="https://soundandsoulful.com/pages/faq">Frequently Asked Questions</a> page for more information. </strong></em></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <br><br>
+        {% include 'includes/footer.html' %}
+    </main>
+
+{% endblock %}

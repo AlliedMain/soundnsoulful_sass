@@ -1,0 +1,52 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+{% block stylesheet %}
+<style>
+    .page-width {
+            padding-left: 55px;
+            padding-right: 55px;
+        }
+        .grid {
+            *zoom: 1;
+            list-style: none;
+            padding: 0;
+
+        }
+</style>
+{% endblock %}
+
+    <main id="pageWrapper">
+        <div class="banner bg-song"></div>
+        <div class="main-container">
+            <div class="section row">
+                <div class="page-width">
+                    <div class="grid">
+                      <div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
+                        <div class="section-header text-center">
+                          <h1>Contact Us</h1>
+                        </div>
+                        <br></br>
+                  
+                        <div class="rte">
+                          <p style="text-align: left;"><strong>Please refer to our "<a href="https://soundandsoulful.com/pages/faq">Frequently Asked Questions</a>" page for:</strong></p>
+                  <ul>
+                  <li><strong>account cancellation</strong></li>
+                  <li><b>reactivating your account</b></li>
+                  <li><b>how to use subliminals</b></li>
+                  <li><b>common questions about using subliminals</b></li>
+                  <li><b>playlist looping concerns</b></li>
+                  </ul>
+                  <p style="text-align: left;">For any additional questions and concerns, you can email our support team at:<strong> support@soundandsoulful.com</strong></p>
+                  <p style="text-align: left;">Please allow 48-72 hours for email responses. </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        {% include 'includes/footer.html' %}
+    </main>
+
+{% endblock %}

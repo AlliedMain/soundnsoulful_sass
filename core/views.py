@@ -19,6 +19,14 @@ def home(request):
     }
     return render(request, "home.html", context)
 
+def instructions(request):
+    return render(request, "songs/instructions.html")
+
+def contact(request):
+    return render(request, "contact/index.html")
+def listeningtips(request):
+    return render(request, "contact/listeningtips.html")
+
 
 class SongUploadView(CreateView):
     form_class = SongUploadForm

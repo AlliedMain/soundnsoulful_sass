@@ -60,7 +60,7 @@
                                                 <img src="{{ song.thumbnail }}" alt="" class="card-img--radius-sm"></div>
                                             <div class="custom-card--inline-desc">
                                                 <p class="text-truncate mb-0">{{ song.title }}</p>
-                                                <p class="text-truncate text-muted font-sm">{{ song.artist }}</p>
+                                                <p class="text-truncate text-muted font-sm">{{ song.album }}</p>
                                             </div>
                                         </div>
                                         <ul class="custom-card--labels d-flex ml-auto">
@@ -189,7 +189,7 @@
                     <hr>
                 </div>
                 <div class="carousel-item-6 arrow-pos-2">
-                    {% for album in albums %}
+                    {% for album in album %}
                         <div class="custom-card">
                             <div class="custom-card--img">
                                 <a href="#">

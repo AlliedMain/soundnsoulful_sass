@@ -68,7 +68,7 @@ class Song(models.Model):
     featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(verbose_name='Created At', default=timezone.now)
     #affirmations = models.CharField(max_length=1250, verbose_name="Affirmations")
-    affrimations_song= models.TextField()
+    affirmations_song= models.TextField()
 
     def __str__(self):
         return self.title
