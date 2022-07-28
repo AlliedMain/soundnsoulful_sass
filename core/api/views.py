@@ -4,7 +4,7 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from core.models import Song
-from .serializers import SongSerializer, AlbumSerializer, GenreSerializer, AlbumSongsSerializer
+from .serializers import SongSerializer, AlbumSerializer, GenreSerializer, AlbumSongsSerializer, TestimonialsSerializer
 
 
 @api_view(['GET'])
@@ -82,5 +82,11 @@ class SongRetrieveAPIView(RetrieveAPIView):
         Get song details
     """
     serializer_class = SongSerializer
+    model = serializer_class.Meta.model
+    queryset = model.objects.all()
+
+
+class TestimonialsAPIView(ListAPIView):
+    serializer_class = TestimonialsSerializer
     model = serializer_class.Meta.model
     queryset = model.objects.all()

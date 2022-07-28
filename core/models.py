@@ -25,7 +25,7 @@ from utils.song_utils import generate_file_name
 
 
 class Album(models.Model):
-    name = models.CharField(max_length=20, null=True)
+    name = models.CharField(max_length=200, null=True)
     thumbnail = models.ImageField(upload_to="album", default="album/album1.png")
 
     def __str__(self):
@@ -33,7 +33,7 @@ class Album(models.Model):
 
 
 class Genre(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
     thumbnail = models.ImageField(upload_to="genres", default="genres/default.png")
 
     def __str__(self):
@@ -90,8 +90,10 @@ class Song(models.Model):
 
 class Testimonials(models.Model):
     STATUS = ((0,"Draft"),(1,"Publish"))
-    title = models.CharField(max_length=200, unique=True)
-    slug = models.SlugField(max_length=200, unique=True)
+    status = models.CharField(max_length=20, choices=STATUS)
+    title = models.TextField(max_length=1250, unique=False)
+    customer_name = models.CharField(max_length=200, null=True)
+    #slug = models.SlugField(max_length=200, unique=False)
     updated_on = models.DateTimeField(auto_now= True)
 
 
