@@ -6,6 +6,7 @@ from .models import *
 admin.site.register(Genre)
 admin.site.register(Album)
 admin.site.register(Testimonials)
+admin.site.register(Playlist)
 
 
 @admin.register(Song)
