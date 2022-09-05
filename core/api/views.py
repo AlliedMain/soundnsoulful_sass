@@ -1,10 +1,11 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from core.models import Song
-from .serializers import SongSerializer, AlbumSerializer, GenreSerializer, AlbumSongsSerializer, TestimonialsSerializer
+from django.views.generic.edit import CreateView
+from core.models import Playlist, Song
+from .serializers import SongSerializer, AlbumSerializer, GenreSerializer, AlbumSongsSerializer, TestimonialsSerializer, PlaylistSerializer
 
 
 @api_view(['GET'])
@@ -90,3 +91,32 @@ class TestimonialsAPIView(ListAPIView):
     serializer_class = TestimonialsSerializer
     model = serializer_class.Meta.model
     queryset = model.objects.all()
+
+
+class PlaylistCreateAPIView(CreateAPIView):
+    
+    """   
+        Create Playlist details 
+    """
+    serializer_class = PlaylistSerializer
+    fields = "__all__"
+    model = serializer_class.Meta.model
+
+
+
+class PlaylistListView(ListAPIView):
+
+    serializer_class = PlaylistSerializer
+    model = serializer_class.Meta.model
+    queryset = model.objects.all()
+
+
+    def get_queryset(self):
+        try:
+            playlist_id = self.kwargs
+            return self.model.objects.filter(playlist_id=playlist_id).order_by('-user')
+        except:
+            return self.model.objects.all().order_by('-user')
+
+
+

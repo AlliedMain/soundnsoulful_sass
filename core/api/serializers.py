@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from core.models import Song, Album, Genre, Testimonials
+from core.models import Playlist, Song, Album, Genre, Testimonials
 
 
 class AlbumSerializer(serializers.ModelSerializer):
@@ -43,3 +43,9 @@ class TestimonialsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Testimonials
         fields = "__all__"
+
+
+class PlaylistSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Playlist
+        fields ="__all__"

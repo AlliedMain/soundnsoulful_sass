@@ -12,4 +12,6 @@ urlpatterns = [
     path('genres', views.GenreListAPIView.as_view()),
     path('genres/<int:pk>/songs', views.SongsByGenreListAPIView.as_view()),
     path('songs/<int:pk>', views.SongRetrieveAPIView.as_view()),
+    path('playlist', views.PlaylistCreateAPIView.as_view()),
+    path('playlist/<int:pk>', views.PlaylistListView.as_view())
 ]

@@ -147,13 +147,13 @@ class TestimonialsDetailView(DetailView):
         return context
 
 
-class FavoriteCreateView(CreateView):
-    form_class = FavoriteForm
+class PlaylistCreateView(CreateView):
+    form_class = PlaylistForm
     http_method_names = ['post']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super(FavoriteCreateView, self).form_valid(form)
+        return super(PlaylistCreateView, self).form_valid(form)
 
     def post(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -174,11 +174,11 @@ def favoriteunfavorite(request):
     if request.method == "POST":
         if request.POST.get('decision') == 'make':
             song = Song.objects.get(id=request.POST.get('song_id'))
-            if not Favorite.objects.filter(user=request.user, song=song).exists():
-                Favorite.objects.create(user=request.user, song=song)
+            if not Playlist.objects.filter(user=request.user, song=song).exists():
+                Playlist.objects.create(user=request.user, song=song)
                 data = {
                     'status': True,
-                    'message': "Song marked as favorite",
+                    'message': "Song marked in Favourite",
                     'redirect': None
                 }
                 return JsonResponse(data)
@@ -192,7 +192,7 @@ def favoriteunfavorite(request):
                 return JsonResponse(data)
         else:
             song = Song.objects.get(id=request.POST.get('song_id'))
-            Favorite.objects.filter(user=request.user, song=song).delete()
+            Playlist.objects.filter(user=request.user, song=song).delete()
             data = {
                 'status': True,
                 'message': "Song unfavorited",
@@ -210,7 +210,7 @@ def favoriteunfavorite(request):
 
 
 class UnFavoriteView(DeleteView):
-    model = Favorite
+    model = Playlist;
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()

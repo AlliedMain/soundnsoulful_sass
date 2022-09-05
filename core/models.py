@@ -100,3 +100,9 @@ class Testimonials(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Playlist(models.Model):
+    list_name=models.CharField(max_length=100)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    songs=models.ManyToManyField(Song)

@@ -23,3 +23,9 @@ class FavoriteForm(forms.ModelForm):
 
     def clean_song(self):
         pass
+
+class PlaylistForm(forms.ModelForm):
+    class Meta:
+        model = Playlist
+        fields = "__all__"
+
