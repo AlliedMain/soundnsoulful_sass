@@ -18,3 +18,4 @@ def registration(request):
         "message": "Successfully registered",
     }
     return response.Response(res, status.HTTP_201_CREATED)
+
