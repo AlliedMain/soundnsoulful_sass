@@ -1,11 +1,15 @@
+from unicodedata import name
 from rest_framework import status
+from accounts.models import User
+from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.views.generic.edit import CreateView
-from core.models import Playlist, Song
-from .serializers import SongSerializer, AlbumSerializer, GenreSerializer, AlbumSongsSerializer, TestimonialsSerializer, PlaylistSerializer
+from core.models import Playlist, Song, Sublimal, Category
+from .serializers import CategorySongsSerializer, SongSerializer, SublimalSerializer, Categoryserializer, SublimalSongsSerializer, TestimonialsSerializer, PlaylistSerializer
+from core.api import serializers
 
 
 @api_view(['GET'])
@@ -34,46 +38,44 @@ class SongListAPIView(ListAPIView):
     queryset = model.objects.all()
 
 
-class SongsByGenreListAPIView(ListAPIView):
+class SongsByCategoryListAPIView(ListAPIView):
     """
-        List of songs by genre
+        List of songs by Category
     """
     serializer_class = SongSerializer
     model = serializer_class.Meta.model
 
     def get_queryset(self):
         try:
-            genre_id = self.kwargs
-            return self.model.objects.filter(genre_id=genre_id).order_by('-created_at')
+            Category_id = self.kwargs
+            return self.model.objects.filter(Category_id=Category_id).order_by('-created_at')
         except:
             return self.model.objects.all().order_by('-created_at')
 
 
-class AlbumListAPIView(ListAPIView):
+class SublimalListAPIView(ListAPIView):
     """
-        List of albums
+        List of Sublimals
     """
-    serializer_class = AlbumSerializer
+    serializer_class = SublimalSerializer
     model = serializer_class.Meta.model
     queryset = model.objects.all()
 
 
-class AlbumRetrieveAPIView(RetrieveAPIView):
+class SublimalRetrieveAPIView(RetrieveAPIView):
     """
-        Albums details view with songs
+        Sublimals details view with songs
     """
-    serializer_class = AlbumSongsSerializer
+    serializer_class = SublimalSongsSerializer
     model = serializer_class.Meta.model
     queryset = model.objects.all()
-    lookup_field = 'slug'
-    lookup_url_kwarg = 'slug'
 
 
-class GenreListAPIView(ListAPIView):
+class CategoryListAPIView(ListAPIView):
     """
-        List of genres
+        List of Categorys
     """
-    serializer_class = GenreSerializer
+    serializer_class = Categoryserializer
     model = serializer_class.Meta.model
     queryset = model.objects.all()
 
@@ -87,10 +89,19 @@ class SongRetrieveAPIView(RetrieveAPIView):
     queryset = model.objects.all()
 
 
+class SongsByCategoryListView(RetrieveAPIView):
+    serializer_class = CategorySongsSerializer
+    model = serializer_class.Meta.model
+    queryset = model.objects.all()
+
+
+
+
 class TestimonialsAPIView(ListAPIView):
     serializer_class = TestimonialsSerializer
     model = serializer_class.Meta.model
     queryset = model.objects.all()
+    
 
 
 class PlaylistCreateAPIView(CreateAPIView):
@@ -105,19 +116,17 @@ class PlaylistCreateAPIView(CreateAPIView):
 
 
 class PlaylistListView(ListAPIView):
-
     serializer_class = PlaylistSerializer
     model = serializer_class.Meta.model
     queryset = model.objects.all()
 
 
     def get_queryset(self):
-        try:
-            playlist_id = self.kwargs
-            return self.model.objects.filter(playlist_id=playlist_id).order_by('-user')
-        except:
-            return self.model.objects.all().order_by('-user')
+        user = get_object_or_404(User, name=self.kwargs.get('playlist'))
+        
+        return Playlist.objects.filter(creator=user).order_by('-date_created')
 
+    
 
 
 

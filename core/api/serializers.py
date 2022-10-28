@@ -1,23 +1,23 @@
 from rest_framework import serializers
 
-from core.models import Playlist, Song, Album, Genre, Testimonials
+from core.models import Playlist, Song, Sublimal, Testimonials,Category
 
 
-class AlbumSerializer(serializers.ModelSerializer):
+class SublimalSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Album
+        model =     Sublimal
         fields = "__all__"
 
 
-class GenreSerializer(serializers.ModelSerializer):
+class Categoryserializer(serializers.ModelSerializer):
     class Meta:
-        model = Genre
+        model = Category
         fields = "__all__"
 
 
 class SongSerializer(serializers.ModelSerializer):
-    album = AlbumSerializer(many=True)
-    genre = GenreSerializer()
+    sublimal = SublimalSerializer(many=True)
+    category = Categoryserializer()
     url = serializers.SerializerMethodField('get_url')
     #album = serializers.SerializerMethodField('get_joined_album')
 
@@ -32,12 +32,20 @@ class SongSerializer(serializers.ModelSerializer):
     #     return ", ".join([a.name for a in obj.album.all()])
 
 
-class AlbumSongsSerializer(serializers.ModelSerializer):
+class SublimalSongsSerializer(serializers.ModelSerializer):
     songs = SongSerializer(many=True, read_only=True)
 
     class Meta:
-        model = Album
+        model = Sublimal
         fields = "__all__"
+
+class CategorySongsSerializer(serializers.ModelSerializer):
+    songs = SongSerializer(many=True, read_only=True)
+
+
+    class Meta:
+        model = Category
+        fields ="__all__"
 
 class TestimonialsSerializer(serializers.ModelSerializer):
     class Meta:

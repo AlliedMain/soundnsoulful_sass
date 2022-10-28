@@ -8,6 +8,7 @@ import datetime
 
 from accounts.models import User
 from utils.song_utils import generate_file_name
+from django.core.paginator import Paginator
 
 
 # class Artist(models.Model):
@@ -24,17 +25,26 @@ from utils.song_utils import generate_file_name
 #         super(Artist, self).save(*args, **kwargs)
 
 
-class Album(models.Model):
-    name = models.CharField(max_length=200, null=True)
-    thumbnail = models.ImageField(upload_to="album", default="album/album1.png")
+# class Album(models.Model):
+#     name = models.CharField(max_length=200, null=True)
+#     thumbnail = models.ImageField(upload_to="album", default="album/album1.png")
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
+
+class Sublimal(models.Model):
+    name = models.CharField(max_length=50)
+    thumbnail = models.ImageField(upload_to="sublimal", default="sublimals/default.png")
 
 
-class Genre(models.Model):
+#     def __str__(self):
+#         return self.name
+
+class Category(models.Model):
     name = models.CharField(max_length=100)
-    thumbnail = models.ImageField(upload_to="genres", default="genres/default.png")
+    thumbnail = models.ImageField(upload_to="category", default="category/default.png")
+    sublimal  = models.ForeignKey(Sublimal, on_delete=models.CASCADE)
+
 
     def __str__(self):
         return self.name
@@ -43,7 +53,6 @@ class Genre(models.Model):
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     song = models.ForeignKey('Song', on_delete=models.CASCADE)
-
 
 def song_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
@@ -58,9 +67,9 @@ class Song(models.Model):
     thumbnail = models.ImageField(upload_to="thumbnails", blank=False)
     song = models.FileField(upload_to=song_directory_path, max_length=500)
     # audio_location = models.CharField(max_length=255)
-    genre = models.ForeignKey(Genre, on_delete=models.DO_NOTHING)
+    sublimal = models.ForeignKey(Sublimal, on_delete=models.DO_NOTHING, null=True, default=None)
     # artists = models.ManyToManyField(Artist, related_name='songs')
-    album = models.ManyToManyField(Album, related_name='album' )
+    category = models.ManyToManyField(Category, related_name='category' )
     size = models.IntegerField(default=0)
     playtime = models.CharField(max_length=10, default="0.00")
     type = models.CharField(max_length=10)
@@ -103,6 +112,11 @@ class Testimonials(models.Model):
 
 
 class Playlist(models.Model):
-    list_name=models.CharField(max_length=100)
+    list_name=models.CharField(max_length=100)   
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     songs=models.ManyToManyField(Song)
+
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.list_name)
+        super(Playlist, self).save(*args, **kwargs)

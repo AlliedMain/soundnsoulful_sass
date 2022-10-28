@@ -3,8 +3,8 @@ from django.contrib import admin
 from utils.song_utils import generate_key
 from .models import *
 
-admin.site.register(Genre)
-admin.site.register(Album)
+admin.site.register(Category)
+admin.site.register(Sublimal)
 admin.site.register(Testimonials)
 admin.site.register(Playlist)
 

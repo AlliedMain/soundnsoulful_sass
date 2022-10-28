@@ -57,10 +57,10 @@
                                     <div class="custom-list--item">
                                         <div class="text-dark custom-card--inline">
                                             <div class="custom-card--inline-img">
-                                                <img src="{{ song.thumbnail }}" alt="" class="card-img--radius-sm"></div>
+                                                <img src="{{song.thumbnail}}" alt="" class="card-img--radius-sm"></div>
                                             <div class="custom-card--inline-desc">
-                                                <p class="text-truncate mb-0">{{ song.title }}</p>
-                                                <p class="text-truncate text-muted font-sm">{{ song.album }}</p>
+                                                <p class="text-truncate mb-0">{{ song.name}}</p>
+                                                <p class="text-truncate text-muted font-sm">{{ song.sublimal }}</p>
                                             </div>
                                         </div>
                                         <ul class="custom-card--labels d-flex ml-auto">
@@ -76,14 +76,15 @@
                         </div>
                         <div class="tab-pane fade" id="trending" role="tabpanel" aria-labelledby="trending-tab">
                             <div class="custom-list">
+                                {% for sublimal in sublimals %}
                                 <div class="custom-list--item">
                                     <div class="text-dark custom-card--inline">
                                         <div class="custom-card--inline-img">
                                             <img src="#" alt="" class="card-img--radius-sm">
                                         </div>
                                         <div class="custom-card--inline-desc">
-                                            <p class="text-truncate mb-0">Mummy</p>
-                                            <p class="text-truncate text-muted font-sm">Arebica Luna</p>
+                                            <p class="text-truncate mb-0">{{sublimal.name}}</p>
+                                            <p class="text-truncate text-muted font-sm">{{sublimal.thumbnail}}</p>
                                         </div>
                                     </div>
                                     <ul class="custom-card--labels d-flex ml-auto">
@@ -92,6 +93,9 @@
                                                 <i class="la la-star"></i>
                                             </span>
                                         </li>
+                                        </ul>
+                                        </div>
+                                        {% endfor %}
                                         {% include 'includes/dropdown.html' %}
                                     </ul>
                                 </div>
@@ -183,21 +187,21 @@
             <div class="section">
                 <div class="heading">
                     <div class="d-flex flex-wrap align-items-end">
-                        <div class="flex-grow-1"><h4>Featured Albums</h4>
+                        <div class="flex-grow-1"><h4>Sublimals</h4>
                             <p>Select you best to listen</p></div>
                         <a href="#" class="btn btn-sm btn-pill btn-air btn-primary">View All</a></div>
                     <hr>
                 </div>
                 <div class="carousel-item-6 arrow-pos-2">
-                    {% for album in album %}
+                    {% for sublimal in sublimals %}
                         <div class="custom-card">
                             <div class="custom-card--img">
                                 <a href="#">
-                                    <img src="{{ album.thumbnail.url }}" alt="{{ album.name }}" class="card-img--radius-lg">
+                                    <img src="{{ sublimal.thumbnail.url }}" alt="{{ sublimal.name }}" class="card-img--radius-lg">
                                 </a>
                             </div>
                             <a href="#" class="custom-card--link mt-2">
-                                <h6 class="mb-0">{{ album.name }}</h6>
+                                <h6 class="mb-0">{{ sublimal.name }}</h6>
                             </a>
                         </div>
                     {% endfor %}
@@ -206,19 +210,19 @@
             <div class="section">
                 <div class="heading">
                     <div class="d-flex flex-wrap align-items-end">
-                        <div class="flex-grow-1"><h4>Genres</h4>
-                            <p>Select you genre</p></div>
-                        <a href="{% url 'core:genres' %}" class="btn btn-sm btn-pill btn-air btn-primary">View All</a></div>
+                        <div class="flex-grow-1"><h4>Category</h4>
+                            <p>Select you category</p></div>
+                        <a href="{% url 'core:category' %}" class="btn btn-sm btn-pill btn-air btn-primary">View All</a></div>
                     <hr>
                 </div>
                 <div class="carousel-item-6 arrow-pos-1">
-                    {% for genre in genres %}
+                    {% for category in categories %}
                         <div class="custom-card">
                             <div class="custom-card--img">
-                                <a href="{% url 'core:songs-by-genre' genre.id %}">
-                                    <img src="{{ genre.thumbnail.url }}" alt="Remix Songs"
+                                <a href="{% url 'core:songs-by-category' category.id %}">
+                                    <img src="{{ category.thumbnail.url }}" alt="Remix Songs"
                                          class="card-img--radius-md">
-                                    <span class="bg-blur">{{ genre.name }}</span>
+                                    <span class="bg-blur">{{ category.name }}</span>
                                 </a>
                             </div>
                         </div>

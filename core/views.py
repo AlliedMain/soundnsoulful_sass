@@ -13,8 +13,8 @@ from tinytag import TinyTag
 
 def home(request):
     context = {
-        'album': Album.objects.all(),
-        'genres': Genre.objects.all()[:6],
+        'sublimal': Sublimal.objects.all()[:6],
+        'categories': Category.objects.all()[:6],
         'latest_songs': Song.objects.all()[:6]
     }
     return render(request, "home.html", context)
@@ -38,8 +38,8 @@ class SongUploadView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(SongUploadView, self).get_context_data(**kwargs)
-        context['album'] = Album.objects.all()
-        context['genres'] = Genre.objects.all()
+        context['sublimal'] = Sublimal.objects.all()
+        context['category'] = Category.objects.all()
         return context
 
     def get_form_kwargs(self):
@@ -63,15 +63,15 @@ class SongUploadView(CreateView):
         form.instance.user = self.request.user
         form.instance.playtime = song.duration
         form.instance.size = song.filesize
-        album = []
-        for a in self.request.POST.getlist('album[]'):
+        sublimal = []
+        for a in self.request.POST.getlist('sublimal[]'):
             try:
-                album.append(int(a))
+                sublimal.append(int(a))
             except:
-                album = Album.objects.create(name=a)
-                album.append(album)
+                sublimal = sublimal.objects.create(name=a)
+                sublimal.append(sublimal)
         form.save()
-        form.instance.artists.set(album)
+        form.instance.artists.set(sublimal)
         form.save()
         data = {
             'status': True,
@@ -96,44 +96,55 @@ def affirmations(request, song_id):
 
 
 
-class GenreListView(ListView):
-    model = Genre
-    template_name = 'genres/index.html'
-    context_object_name = 'genres'
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'Categorys/index.html'
+    context_object_name = 'Categorys'
 
 # class AffirmationsListView(ListView):
 #     model = Song
-#     template_name = 'genres/index.html'
-#     context_object_name = 'genres'
+#     template_name = 'Categorys/index.html'
+#     context_object_name = 'Categorys'
 
 
-class SongsByGenreListView(DetailView):
-    model = Genre
-    template_name = 'genres/songs-by-genre.html'
-    context_object_name = 'genre'
+class SongsByCategoryListView(DetailView):
+    model = Category
+    template_name = 'Categorys/songs-by-Category.html'
+    context_object_name = 'category'
 
     def get_context_data(self, **kwargs):
-        context = super(SongsByGenreListView, self).get_context_data(**kwargs)
+        context = super(SongsByCategoryListView, self).get_context_data(**kwargs)
+        context['songs'] = self.get_object().song_set.all
+        return context
+
+class SongsBySublimalListView(DetailView):
+    model = Sublimal
+    template_name = 'sublimal/songs-by-Category.html'
+    context_object_name = 'sublimal'
+
+    def get_context_data(self, **kwargs):
+        context = super(SongsBySublimalListView, self).get_context_data(**kwargs)
         context['songs'] = self.get_object().song_set.all
         return context
 
 
-class AlbumListView(ListView):
-     model = Album
-     template_name = 'album/index.html'
-     context_object_name = 'album'
+
+class SublimalListView(ListView):
+     model = Sublimal
+     template_name = 'sublimal/index.html'
+     context_object_name = 'sublimal'
 
 
-class AlbumDetailView(DetailView):
-    model = Album
-    template_name = 'album/show.html'
-    context_object_name = 'album'
+class SublimalDetailView(DetailView):
+    model = Sublimal
+    template_name = 'sublimal/show.html'
+    context_object_name = 'sublimal'
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
 
     def get_context_data(self, **kwargs):
-        context = super(AlbumDetailView, self).get_context_data(**kwargs)
-        context['album'] = self.get_object().songs.all()
+        context = super(SublimalDetailView, self).get_context_data(**kwargs)
+        context['sublimal'] = self.get_object().songs.all()
         return context
 
 class TestimonialsDetailView(DetailView):
